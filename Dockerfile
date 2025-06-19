@@ -12,10 +12,13 @@ ADD https://raw.githubusercontent.com/debridmediamanager/zurg-testing/main/scrip
 ENV \
   XDG_CONFIG_HOME=/config \
   TERM=xterm
+  TZ=Europe/Amsterdam
 
 RUN \
   apk add --update --no-cache gcompat libstdc++ libxml2-utils curl tzdata nano ca-certificates wget fuse3 python3 build-base py3-pip python3-dev linux-headers ffmpeg rust cargo && \
   ln -sf python3 /usr/bin/python && \
+  cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime && \
+  echo "Europe/Amsterdam" > /etc/timezone && \
   mkdir /log && \
   python3 -m venv /venv && \
   source /venv/bin/activate && \
